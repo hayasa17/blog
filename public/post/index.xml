@@ -7,14 +7,178 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>hayasa17</copyright>
-        <lastBuildDate>Sat, 02 Nov 2024 14:54:08 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 13 Nov 2024 12:33:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ads Notebook</title>
+        <link>http://localhost:1313/p/ads-notebook/</link>
+        <pubDate>Wed, 13 Nov 2024 12:33:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ads-notebook/</guid>
+        <description>&lt;p&gt;鉴于期中考试的严重失利，本人痛定思痛，决定开始撰写这篇笔记，旨在事无巨细的记录下 ads 课程中 ppt 中的细节，以便备考.&lt;/p&gt;
+&lt;h2 id=&#34;balanced-tree--search-tree&#34;&gt;Balanced Tree &amp;amp; Search Tree
+&lt;/h2&gt;&lt;p&gt;先明确几个概念&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;高度：空树的高度被视作１&lt;/li&gt;
+&lt;li&gt;平衡：左右子树的高度差不超过１&lt;/li&gt;
+&lt;li&gt;旋转：分为左旋和右旋，详情见图&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;avl-tree&#34;&gt;AVL Tree
+&lt;/h3&gt;&lt;p&gt;这是最早接触的平衡树，要求绝对的平衡．&lt;/p&gt;
+&lt;h4 id=&#34;rotation&#34;&gt;rotation
+&lt;/h4&gt;&lt;p&gt;每次加入或删除节点后通过旋转来保持平衡．旋转种类分为LR,LL,RL,RR&lt;/p&gt;
+&lt;p&gt;简而言之，就是将不平衡的节点需要旋转的部分，先旋转为一条直链，再进行旋转，若一开始便为直链则不需要．&lt;/p&gt;
+&lt;p&gt;原因：TBD&lt;/p&gt;
+&lt;h4 id=&#34;复杂度&#34;&gt;复杂度
+&lt;/h4&gt;&lt;p&gt;单次时间复杂度严格$O(log n)$&lt;/p&gt;
+&lt;h3 id=&#34;splay-tree&#34;&gt;Splay Tree
+&lt;/h3&gt;&lt;p&gt;每次操作都会将访问的节点旋转至根节点，称为access.&lt;/p&gt;
+&lt;h4 id=&#34;access&#34;&gt;access
+&lt;/h4&gt;&lt;p&gt;旋转操作分为两种，zigzig 和 zigzag&lt;/p&gt;
+&lt;p&gt;zigzag 与 AVL Tree中的旋转相同，处理折链情况．&lt;/p&gt;
+&lt;p&gt;zigzig 如图&lt;/p&gt;
+&lt;p&gt;特别的．如果当先 access 的节点已经为 root 的儿子，则简简单单的将其转到 root 上&lt;/p&gt;
+&lt;h4 id=&#34;insert&#34;&gt;Insert
+&lt;/h4&gt;&lt;p&gt;直接在二叉搜索树上寻找到位置插入，并且 access&lt;/p&gt;
+&lt;h4 id=&#34;merge&#34;&gt;Merge
+&lt;/h4&gt;&lt;p&gt;要求其中一个树的最小值大于另一棵树的最大值&lt;/p&gt;
+&lt;p&gt;access 小树的最大值，将大树接在小树的右儿子上&lt;/p&gt;
+&lt;p&gt;ps:同样可以 access 大树的最小值，但是与 ppt 不同&lt;/p&gt;
+&lt;h4 id=&#34;delete&#34;&gt;Delete
+&lt;/h4&gt;&lt;p&gt;access 所删节点,　删去根节点，然后合并两个子树&lt;/p&gt;
+&lt;h4 id=&#34;复杂度-1&#34;&gt;复杂度
+&lt;/h4&gt;&lt;p&gt;均摊时间复杂度$O(log n)$，也就是说 n 次连续操作时间复杂度$O(n log n)$&lt;/p&gt;
+&lt;h4 id=&#34;重要原句&#34;&gt;重要原句
+&lt;/h4&gt;&lt;p&gt;worst-case bound &amp;gt;= amortized bound &amp;gt;= average-case bound&lt;/p&gt;
+&lt;p&gt;Splaying not only moves the accessed node to the root, but also roughly halves the depth of most nodes on the path.&lt;/p&gt;
+&lt;h3 id=&#34;analysis&#34;&gt;Analysis
+&lt;/h3&gt;&lt;h4 id=&#34;amortized-analysis&#34;&gt;Amortized Analysis
+&lt;/h4&gt;&lt;p&gt;势能分析法&lt;/p&gt;
+&lt;p&gt;splay 的复杂度分析：TBD&lt;/p&gt;
+&lt;h4 id=&#34;aggregate-analysis&#34;&gt;Aggregate analysis
+&lt;/h4&gt;&lt;h4 id=&#34;accounting-method&#34;&gt;Accounting method
+&lt;/h4&gt;&lt;h3 id=&#34;reb-black-tree&#34;&gt;Reb-black Tree
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;节点为红色或黑色&lt;/li&gt;
+&lt;li&gt;根节点为黑色&lt;/li&gt;
+&lt;li&gt;NIL为黑色&lt;/li&gt;
+&lt;li&gt;红节点的儿子都为黑色&lt;/li&gt;
+&lt;li&gt;bh(black height)相同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;insert-1&#34;&gt;Insert
+&lt;/h4&gt;&lt;p&gt;插入的节点默认为红色节点，会在后续操作中重新染色&lt;/p&gt;
+&lt;p&gt;Case1:&lt;/p&gt;
+&lt;p&gt;Case2:&lt;/p&gt;
+&lt;p&gt;Case3:&lt;/p&gt;
+&lt;h4 id=&#34;delete-1&#34;&gt;delete
+&lt;/h4&gt;&lt;p&gt;删除操作可以通过一些操作进行简化，删除后还需要进行重新染色保证性质５&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若删除的为叶子节点，则直接删除&lt;/li&gt;
+&lt;li&gt;若删除的节点度数为１，则用其孩子代替他&lt;/li&gt;
+&lt;li&gt;若删除的节点度数为２，则先将其与其前驱或后继替换（仅交换数值），再进行删除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;重新染色：&lt;/p&gt;
+&lt;p&gt;Case1:&lt;/p&gt;
+&lt;p&gt;Case2:&lt;/p&gt;
+&lt;p&gt;Case3:&lt;/p&gt;
+&lt;p&gt;Case4:&lt;/p&gt;
+&lt;h4 id=&#34;重要结论&#34;&gt;重要结论
+&lt;/h4&gt;&lt;p&gt;有n个内部节点的红黑树深度最多为$2ln(n+1)$&lt;/p&gt;
+&lt;p&gt;证明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$sizeof(x) &amp;gt;= 2^(bh(x))-1$,可用归纳法证明&lt;/li&gt;
+&lt;li&gt;$bh(tree)&amp;gt;=h(tree)/2$,可用反证法证明&lt;/li&gt;
+&lt;li&gt;结合以上两点可以证明&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;旋转次数&lt;/th&gt;
+          &lt;th&gt;AVL&lt;/th&gt;
+          &lt;th&gt;RBTree&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Insertion&lt;/td&gt;
+          &lt;td&gt;$&amp;lt;=2$&lt;/td&gt;
+          &lt;td&gt;$&amp;lt;=2$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Deletion&lt;/td&gt;
+          &lt;td&gt;$O(log n)$&lt;/td&gt;
+          &lt;td&gt;$&amp;lt;=3$&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;红黑树的recolor次数仍是$O(log n)$&lt;/p&gt;
+&lt;h3 id=&#34;b-tree&#34;&gt;B+ Tree
+&lt;/h3&gt;&lt;p&gt;B+树实际上是一个特殊的多叉搜索树&lt;/p&gt;
+&lt;p&gt;B+树有一个关键参数M，当M为4时成为2-3-4树，当M为3时成为2-3树&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根节点是一个叶子或有２~M个儿子&lt;/li&gt;
+&lt;li&gt;非叶子节点（除了根）有$\lceil M/2 \rceil$ ~ M 儿子&lt;/li&gt;
+&lt;li&gt;所有叶子深度相同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;特别的:The best choice of M is 3 or 4.&lt;/p&gt;
+&lt;p&gt;图例最为直观&lt;/p&gt;
+&lt;h4 id=&#34;insertion&#34;&gt;Insertion
+&lt;/h4&gt;&lt;p&gt;按照搜索树的性质找到插入的节点进行插入，若插入后导致该节点内的数据过多时，则将该节点分裂为$\lceil (M+1)/2 \rceil$ 和　$\lfloor (M+1)/2 \rfloor$两个节点，同时更新父亲的索引值，类似操作递归至根节点．&lt;/p&gt;
+&lt;p&gt;PS:分裂的两个节点顺序要与文中相同&lt;/p&gt;
+&lt;h4 id=&#34;deletion&#34;&gt;Deletion
+&lt;/h4&gt;&lt;p&gt;类似Insertion的逆操作，当儿子删得仅剩一个时要删除父节点．&lt;/p&gt;
+&lt;p&gt;ppt中没有过多描述．&lt;/p&gt;
+&lt;h2 id=&#34;inverted-file-index&#34;&gt;Inverted File Index
+&lt;/h2&gt;&lt;p&gt;正常来讲，文章中包含了一个个单词.
+所谓Inverted File Index，Inverted体现在于在单词为索引的Index中存下了文章．&lt;/p&gt;
+&lt;p&gt;具体而言就是记录下每个单词出现在文章的位置&lt;/p&gt;
+&lt;p&gt;###　术语
+该知识点比较简单，下面仅列举一些术语:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Word Stemming: 词干提取，提取出单词的词根&lt;/li&gt;
+&lt;li&gt;Stop Words: 忽略一些常用无实意词如a,the,it&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;Relevant&lt;/th&gt;
+          &lt;th&gt;Irrelevant&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Retrieved&lt;/td&gt;
+          &lt;td&gt;$R_R$&lt;/td&gt;
+          &lt;td&gt;$I_R$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Not Retrieved&lt;/td&gt;
+          &lt;td&gt;$R_N$&lt;/td&gt;
+          &lt;td&gt;$I_N$&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Precision P = $R_R /(R_R +I_R)$
+用来衡量查询结果是否准确&lt;/p&gt;
+&lt;p&gt;Recall R=$R_R /(R_R+R_n)$
+用来衡量查询结果是否充分&lt;/p&gt;
+&lt;h3 id=&#34;可能重要的原句&#34;&gt;可能重要的原句：
+&lt;/h3&gt;&lt;p&gt;Most gaps can be encoded with far fewer than 20 bits.&lt;/p&gt;
+&lt;p&gt;Gap 指的是在存储Inverted File Index时，存储一个term的列表是选择存储其差分列表的列表内最大值．&lt;/p&gt;
+&lt;h2 id=&#34;heap&#34;&gt;Heap
+&lt;/h2&gt;&lt;h3 id=&#34;leftist-heap&#34;&gt;Leftist Heap
+&lt;/h3&gt;&lt;p&gt;左偏堆，顾名思义向左倾斜的堆，实际上为左边的NPL更大的堆&lt;/p&gt;
+&lt;h3 id=&#34;skew-heap&#34;&gt;Skew Heap
+&lt;/h3&gt;</description>
+        </item>
+        <item>
         <title>About</title>
         <link>http://localhost:1313/p/about/</link>
         <pubDate>Sat, 02 Nov 2024 14:54:08 +0800</pubDate>
         
         <guid>http://localhost:1313/p/about/</guid>
         <description>&lt;h1 id=&#34;this-is-my-first-blog&#34;&gt;this is my first blog.
-&lt;/h1&gt;&lt;p&gt;dhsajkd&lt;/p&gt;
+&lt;/h1&gt;&lt;p&gt;dhsajkd
+sdkjadjlj&lt;/p&gt;
 &lt;h1 id=&#34;sajdkadla&#34;&gt;sajdkadla
 &lt;/h1&gt;</description>
         </item>
